@@ -1,0 +1,40 @@
+{% extends 'BusBundle::base.html.twig' %}
+
+{% block content %}
+    <h1>{{ 'Service call'|trans }}</h1>
+
+    <h2>{{ 'Detail'|trans }}</h2>
+    <table class="table table-condensed table-striped">
+        <tbody>
+        <tr>
+            <td>{{ 'Service'|trans }}</td>
+            <td><a href="{{ path('service_show', {id: service_call.service.id}) }}">{{ service_call.service.name }}</a></td>
+        </tr>
+        <tr>
+            <td>{{ 'State'|trans }}</td>
+            <td>{{ service_call.state }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'Date'|trans }}</td>
+            <td>{{ service_call.date|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'Caller'|trans }}</td>
+            <td>{{ service_call.caller }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'Duration'|trans }}</td>
+            <td>{{ service_call.duration }} ms</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>{{ 'Request'|trans }}</h2>
+    <pre>{{ service_call.request }}</pre>
+
+    <h2>{{ 'Response'|trans }}</h2>
+    <pre>{{ service_call.response }}</pre>
+
+    <h2>{{ 'Logs'|trans }}</h2>
+    <pre>{{ service_call.logs }}</pre>
+{% endblock %}

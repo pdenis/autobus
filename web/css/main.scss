@@ -1,0 +1,29 @@
+
+$main-color: #7F0000;
+
+body {
+  color: #3d3d3d;
+  font-family: "roboto", sans-serif;
+}
+
+#header {
+  padding: 20px;
+
+
+  #logo-container {
+    text-align: center;
+
+    #logo {
+      width: 100px;
+      border: 0;
+    }
+
+    #name {
+      display: block;
+      color: $main-color;
+      font-size: 2em;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  }
+}

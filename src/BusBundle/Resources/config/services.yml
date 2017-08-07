@@ -1,0 +1,13 @@
+services:
+  BusBundle\Service\ServiceChain: ~
+  form.type.service:
+    class: BusBundle\Form\ServiceType
+    arguments: ['@BusBundle\Service\ServiceChain']
+    tags: ["form.type"]
+  bus.service.helloworld:
+    class: BusBundle\Service\HelloWorldService
+    tags: ["bus.service"]
+  bus.service.factory:
+    class: BusBundle\Entity\ServiceFactory
+  bus.form.service.factory:
+    class: BusBundle\Form\ServiceTypeFactory

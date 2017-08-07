@@ -1,0 +1,51 @@
+{% extends 'BusBundle::base.html.twig' %}
+
+{% block content %}
+    <h1>Service creation</h1>
+
+    {% if form is not defined %}
+        <form action="{{ path('service_new') }}" method="get" id="form-service-type">
+            <div class="form-group">
+                <label class="col-xs-2 col-xs-offset-3" for="service-type">{{ 'Type'|trans }}</label>
+                <div class="col-xs-4">
+                    <select class="form-control" name="service_type" id="service-type" required="required">
+                        <option value="">{{ 'Choose'|trans }}</option>
+                        <option value="web">Web</option>
+                        <option value="queue">Queue</option>
+                        <option value="cron">Cron</option>
+                    </select>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="p-m">
+                <div class="text-center">
+                    <button class="btn btn-primary"><i class="fa fa-plus"></i> {{ 'Create'|trans }}
+                    </button>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    {% else %}
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create"/>
+        {{ form_end(form) }}
+    {% endif %}
+
+    <ul>
+        <li>
+            <a href="{{ path('service_index') }}">Back to the list</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        jQuery(function () {
+            jQuery('#service-type').on('change', function() {
+                jQuery('#form-service-type').submit();
+            });
+        });
+    </script>
+{% endblock %}

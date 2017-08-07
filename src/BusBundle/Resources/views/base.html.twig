@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Autobus{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap-theme.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+    </head>
+    <body>
+        {% block body %}
+            <div class="container">
+                <div id="header">
+                    <div id="logo-container">
+                        <a href="{{ path('service_index') }}">
+                            <img src="{{ asset('images/autobus-logo.png') }}" alt="Logo" id="logo"/>
+                        </a>
+                        <a id="name" href="{{ path('service_index') }}">Autobus</a>
+                    </div>
+                </div>
+                {% block content %}{% endblock %}
+            </div>
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
