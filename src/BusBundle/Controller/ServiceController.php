@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 /**
@@ -119,7 +120,10 @@ class ServiceController extends Controller
     }
 
     /**
-     * Call service
+     * @param Request $request
+     * @param Service $service
+     *
+     * @return Response
      */
     public function callAction(Request $request, Service $service)
     {
@@ -128,32 +132,17 @@ class ServiceController extends Controller
         $serviceInstance = $this->get($serviceClass);
 
         if (!$service) {
-            return new Response('', 404);
+            throw new NotFoundHttpException('Servicedoes not exist');
         }
 
         $response = new Response();
         $serviceCall = new ServiceCall();
 
-        try {
-            $serviceInstance->beforeHandle($request, $service, $serviceCall);
-            $serviceInstance->handle($request, $response, $service, $serviceCall);
-            $serviceCall->setState($serviceCall::STATE_SUCCESS);
-        } catch (BadRequestHttpException $e) {
-            $response->setContent($e->getMessage());
-            $response->setStatusCode(400);
-        } catch (AuthenticationException $e) {
-            $response->setContent($e->getMessage());
-            $response->setStatusCode(401);
-        } catch (\Exception $e) {
-            $response->setStatusCode(500);
-            $response->setContent($e->getMessage());
-        } finally {
-            $serviceInstance->afterHandle($request, $response, $service, $serviceCall, $this->get('logger'));
+        $serviceInstance->handle($request, $response, $service, $serviceCall);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($serviceCall);
-            $em->flush();
-        }
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($serviceCall);
+        $em->flush();
 
         return $response;
     }

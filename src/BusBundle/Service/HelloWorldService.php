@@ -9,8 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HelloWorldService extends AbstractBusService
 {
-
-    public function handle(Request $request, Response $response, Service $service, ServiceCall $serviceCall)
+    protected function process(Request $request, Response $response, Service $service, ServiceCall $serviceCall)
     {
         return $response->setContent('Hello world!');
     }
