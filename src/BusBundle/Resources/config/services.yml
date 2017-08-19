@@ -34,4 +34,6 @@ services:
 
   bus.event_listener.secure_webservice:
       class: BusBundle\EventListener\SecureWebServiceSubscriber
+      arguments:
+        - '@BusBundle\Security\SecurityChain'
       tags: ['kernel.event_subscriber']

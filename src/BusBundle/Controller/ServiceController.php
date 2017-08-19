@@ -89,7 +89,9 @@ class ServiceController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($service);
+            $em->flush();
 
             return $this->redirectToRoute('service_edit', array('id' => $service->getId()));
         }
