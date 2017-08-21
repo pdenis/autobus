@@ -1,7 +1,0 @@
-bus_service:
-    resource: "@BusBundle/Resources/config/routing/service.yml"
-    prefix:   /service
-
-bus_service_call:
-    resource: "@BusBundle/Resources/config/routing/service_call.yml"
-    prefix:   /service_call

@@ -1,4 +1,0 @@
-service_call_show:
-    path:     /{id}/show
-    defaults: { _controller: "BusBundle:ServiceCall:show" }
-    methods:  GET
