@@ -17,5 +17,6 @@ class BusExtension extends Extension
         );
 
         $loader->load('services.yml');
+        $loader->load('security.yml');
     }
 }

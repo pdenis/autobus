@@ -62,6 +62,11 @@ abstract class Service
     protected $config;
 
     /**
+     * @var array
+     */
+    protected $configArray;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="trace", type="boolean")
@@ -208,7 +213,11 @@ abstract class Service
      */
     public function getConfigArray()
     {
-        return json_decode($this->config, true);
+        if (null === $this->configArray) {
+            $this->configArray = json_decode($this->config, true);
+        }
+
+        return $this->configArray;
     }
 
     /**
@@ -218,6 +227,7 @@ abstract class Service
      */
     public function setConfigArray($config)
     {
+        $this->configArray = $config;
         $this->config = json_encode($config);
 
         return $this;
