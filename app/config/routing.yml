@@ -6,5 +6,5 @@ root:
     path: /
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
-        route: service_index
+        route: job_index
         permanent: true
