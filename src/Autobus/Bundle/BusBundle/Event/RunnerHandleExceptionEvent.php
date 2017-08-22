@@ -2,6 +2,7 @@
 
 namespace Autobus\Bundle\BusBundle\Event;
 
+use Autobus\Bundle\BusBundle\Runner\RunnerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Autobus\Bundle\BusBundle\Entity\Job;
@@ -18,15 +19,16 @@ class RunnerHandleExceptionEvent extends RunnerHandleEvent
     protected $exception;
 
     /**
-     * @param Request    $request
-     * @param Response   $response
-     * @param Job        $job
-     * @param Execution  $execution
-     * @param \Exception $exception
+     * @param RunnerInterface $runner
+     * @param Request         $request
+     * @param Response        $response
+     * @param Job             $job
+     * @param Execution       $execution
+     * @param \Exception      $exception
      */
-    public function __construct(Request $request, Response $response, Job $job, Execution $execution, \Exception $exception)
+    public function __construct(RunnerInterface $runner, Request $request, Response $response, Job $job, Execution $execution, \Exception $exception)
     {
-        parent::__construct($request, $response, $job, $execution);
+        parent::__construct($runner, $request, $response, $job, $execution);
 
         $this->exception = $exception;
     }

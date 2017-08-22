@@ -6,12 +6,6 @@ services:
     arguments: ['@Autobus\Bundle\BusBundle\Runner\RunnerChain']
     tags: ['form.type']
 
-  bus.runner.helloworld:
-    class: Autobus\Bundle\BusBundle\Runner\HelloWorldRunner
-    arguments:
-      - '@event_dispatcher'
-    tags: ['bus.runner']
-
   bus.job.factory:
     class: Autobus\Bundle\BusBundle\Entity\JobFactory
 

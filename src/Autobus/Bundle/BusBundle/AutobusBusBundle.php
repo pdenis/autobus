@@ -9,6 +9,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AutobusBusBundle extends Bundle
 {
+    /**
+     * @param ContainerBuilder $container
+     */
     public function build(ContainerBuilder $container)
     {
         $container->addCompilerPass(new RunnerCompilerPass());

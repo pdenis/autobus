@@ -1,10 +1,18 @@
+autobus_bus_sample:
+    resource: "@AutobusBusSampleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+autobus_bus_export:
+    resource: "@AutobusBusExportBundle/Resources/config/routing.yml"
+    prefix:   /
+
 bus:
-    resource: "@BusBundle/Resources/config/routing.yml"
+    resource: "@AutobusBusBundle/Resources/config/routing.yml"
     prefix:   /
 
 root:
     path: /
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
-        route: service_index
+        route: job_index
         permanent: true

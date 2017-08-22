@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 class JobController extends Controller
 {
     /**
-     * Lists all service entities.
+     * Lists all job entities.
      *
      */
     public function indexAction()

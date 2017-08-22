@@ -16,7 +16,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new \JMS\SerializerBundle\JMSSerializerBundle(),
             new Autobus\Bundle\BusBundle\AutobusBusBundle(),
+            new Autobus\Bundle\BusExportBundle\AutobusBusExportBundle(),
+            new Autobus\Bundle\BusSampleBundle\AutobusBusSampleBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

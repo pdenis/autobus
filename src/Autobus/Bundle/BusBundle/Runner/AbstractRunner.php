@@ -51,7 +51,7 @@ abstract class AbstractRunner implements RunnerInterface
      */
     public function handle(Request $request, Response $response, Job $job, Execution $execution)
     {
-        $event = new RunnerHandleEvent($request, $response, $job, $execution);
+        $event = new RunnerHandleEvent($this, $request, $response, $job, $execution);
 
         try {
             $this->eventDispatcher->dispatch(RunnerEvents::BEFORE_HANDLE, $event);
@@ -59,10 +59,12 @@ abstract class AbstractRunner implements RunnerInterface
             $this->process($request, $response, $job, $execution);
             $execution->setState($execution::STATE_SUCCESS);
             $this->eventDispatcher->dispatch(RunnerEvents::SUCCESS, $event);
+
         } catch(\Exception $exception) {
             $this->eventDispatcher->dispatch(
                 RunnerEvents::ERROR,
                 new RunnerHandleExceptionEvent(
+                    $this,
                     $request,
                     $response,
                     $job,
