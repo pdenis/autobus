@@ -1,0 +1,3 @@
+autobus_bus_export_homepage:
+    path:     /
+    defaults: { _controller: AutobusBusExportBundle:Default:index }

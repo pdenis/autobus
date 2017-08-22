@@ -1,3 +1,11 @@
+autobus_bus_sample:
+    resource: "@AutobusBusSampleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+autobus_bus_export:
+    resource: "@AutobusBusExportBundle/Resources/config/routing.yml"
+    prefix:   /
+
 bus:
     resource: "@AutobusBusBundle/Resources/config/routing.yml"
     prefix:   /
