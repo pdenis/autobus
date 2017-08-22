@@ -2,6 +2,8 @@
 
 namespace Autobus\Bundle\BusBundle\Form;
 
+use Autobus\Bundle\BusBundle\Entity\JobGroup;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,6 +26,7 @@ class JobType extends AbstractType
         $builder
           ->add('name')
           ->add('runner', ChoiceType::class, ['choices' => $runnerClasses])
+          ->add('group', EntityType::class, ['placeholder' => 'Choose ...', 'required' => false, 'class' => JobGroup::class])
           ->add('trace')
           ->add('config');
     }
