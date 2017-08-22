@@ -1,5 +1,5 @@
 bus:
-    resource: "@BusBundle/Resources/config/routing.yml"
+    resource: "@AutobusBusBundle/Resources/config/routing.yml"
     prefix:   /
 
 root:
