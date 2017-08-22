@@ -14,12 +14,12 @@ php bin/console doctrine:fixtures:load
 php bin/console server:run
 ```
 
-## Create a service
+## Create a job
 
 To create a new service:
 
-* Create it's class, implementing `BusBundle\Service\BusServiceInterface` ; it may extend `BusBundle\Service\AbstractBusService`
-* Declare it as a service in your bundle's `services.yml`, with tag `bus.service`
+* Create it's class, implementing `Autobus\Bundle\BusBundle\Runner\RunnerInterface` ; it may extend `Autobus\Bundle\BusBundle\Runner\AbstractRunner`
+* Declare it as a service in your bundle's `services.yml`, with tag `bus.runner`
 * Create an instance from the web UI
 
 ## Requirements
