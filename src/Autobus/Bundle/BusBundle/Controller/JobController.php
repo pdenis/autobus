@@ -81,7 +81,7 @@ class JobController extends Controller
     public function editAction(Request $request, Job $job)
     {
         $deleteForm = $this->createDeleteForm($job);
-        $editForm = $this->createForm('Autobus\Bundle\BusBundle\Form\JobType', $job);
+        $editForm = $this->createForm('Autobus\Bundle\BusBundle\Form\JobType', $job, ['runner_chain' => $this->get('Autobus\Bundle\BusBundle\Runner\RunnerChain')]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -89,7 +89,7 @@ class JobController extends Controller
             $em->persist($job);
             $em->flush();
 
-            return $this->redirectToRoute('service_edit', array('id' => $job->getId()));
+            return $this->redirectToRoute('job_edit', array('id' => $job->getId()));
         }
 
         return $this->render('AutobusBusBundle::job/edit.html.twig', array(
