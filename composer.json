@@ -1,7 +1,17 @@
 {
-    "name": "ClickAndMortar/Autobus",
-    "license": "proprietary",
+    "name": "autobus-php/autobus",
+    "license": "MIT",
     "type": "project",
+    "authors": [
+        {
+            "name": "Michael BOUVY",
+            "email": "michael.bouvy@clickandmortar.fr"
+        },
+        {
+            "name": "Pascal DENIS",
+            "email": "pascal.denis@businessdecision.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "AppBundle\\": "src/AppBundle",
@@ -21,7 +31,7 @@
         ]
     },
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=7.0.0",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
         "doctrine/orm": "^2.5",
