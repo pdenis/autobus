@@ -2,6 +2,7 @@
 
 namespace Autobus\Bundle\BusBundle\Entity;
 
+use Autobus\Bundle\BusBundle\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -111,9 +112,10 @@ abstract class Job
         }
     }
 
-    public function populateExecution(Execution $execution)
+    public function populateExecution(Execution $execution, Context $context)
     {
         $execution->setDate(new \DateTime());
+        $execution->setCaller(gethostname());
     }
 
     /**

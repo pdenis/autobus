@@ -2,6 +2,7 @@
 
 namespace Autobus\Bundle\BusBundle\Event;
 
+use Autobus\Bundle\BusBundle\Context;
 use Autobus\Bundle\BusBundle\Entity\Job;
 use Autobus\Bundle\BusBundle\Runner\RunnerInterface;
 use Symfony\Component\EventDispatcher\Event;
@@ -40,19 +41,24 @@ class RunnerHandleEvent extends Event
     protected $runner;
 
     /**
-     * @param RunnerInterface $runner
-     * @param Request         $request
-     * @param Response        $response
-     * @param Job             $job
-     * @param Execution       $execution
+     * @var Context
      */
-    public function __construct(RunnerInterface $runner, Request $request, Response $response, Job $job, Execution $execution)
+    protected $context;
+
+    /**
+     * @param RunnerInterface $runner
+     * @param Context $context
+     * @param Job $job
+     * @param Execution $execution
+     */
+    public function __construct(RunnerInterface $runner, Context $context, Job $job, Execution $execution)
     {
         $this->runner    = $runner;
         $this->job       = $job;
         $this->execution = $execution;
-        $this->request   = $request;
-        $this->response  = $response;
+        $this->request   = $context->getRequest();
+        $this->response  = $context->getResponse();
+        $this->context   = $context;
     }
 
     /**
@@ -93,5 +99,13 @@ class RunnerHandleEvent extends Event
     public function getResponse()
     {
         return $this->response;
+    }
+
+    /**
+     * @return Context
+     */
+    public function getContext()
+    {
+        return $this->context;
     }
 }

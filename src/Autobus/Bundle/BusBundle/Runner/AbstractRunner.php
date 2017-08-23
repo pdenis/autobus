@@ -2,16 +2,13 @@
 
 namespace Autobus\Bundle\BusBundle\Runner;
 
+use Autobus\Bundle\BusBundle\Context;
 use Autobus\Bundle\BusBundle\Entity\Job;
 use Autobus\Bundle\BusBundle\Entity\Execution;
-use Autobus\Bundle\BusBundle\Event\BusServiceEvents;
-use Autobus\Bundle\BusBundle\Event\BusServiceHandleEvent;
 use Autobus\Bundle\BusBundle\Event\RunnerEvents;
 use Autobus\Bundle\BusBundle\Event\RunnerHandleEvent;
 use Autobus\Bundle\BusBundle\Event\RunnerHandleExceptionEvent;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class AbstractRunner
@@ -32,31 +29,29 @@ abstract class AbstractRunner implements RunnerInterface
     }
 
     /**
-     * @param Request     $request
-     * @param Response    $response
+     * @param Context     $context
      * @param Job         $job
      * @param Execution   $execution
      *
      * @return mixed
      */
-    abstract protected function process(Request $request, Response $response, Job $job, Execution $execution);
+    abstract protected function process(Context $context, Job $job, Execution $execution);
 
     /**
-     * @param Request   $request
-     * @param Response  $response
+     * @param Context   $context
      * @param Job       $job
      * @param Execution $execution
      *
-     * @return Response
+     * @return Context
      */
-    public function handle(Request $request, Response $response, Job $job, Execution $execution)
+    public function handle(Context $context, Job $job, Execution $execution)
     {
-        $event = new RunnerHandleEvent($this, $request, $response, $job, $execution);
+        $event = new RunnerHandleEvent($this, $context, $job, $execution);
 
         try {
             $this->eventDispatcher->dispatch(RunnerEvents::BEFORE_HANDLE, $event);
 
-            $this->process($request, $response, $job, $execution);
+            $this->process($context, $job, $execution);
             $execution->setState($execution::STATE_SUCCESS);
             $this->eventDispatcher->dispatch(RunnerEvents::SUCCESS, $event);
 
@@ -65,8 +60,7 @@ abstract class AbstractRunner implements RunnerInterface
                 RunnerEvents::ERROR,
                 new RunnerHandleExceptionEvent(
                     $this,
-                    $request,
-                    $response,
+                    $context,
                     $job,
                     $execution,
                     $exception
