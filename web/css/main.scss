@@ -1,24 +1,48 @@
 
 $main-color: #7F0000;
 
-#header {
-  padding: 20px;
+body {
+  #header {
+    padding: 20px;
 
 
-  #logo-container {
-    text-align: center;
+    #logo-container {
+      text-align: center;
 
-    #logo {
-      width: 100px;
-      border: 0;
+      #logo {
+        width: 100px;
+        border: 0;
+      }
+
+      #name {
+        display: block;
+        color: $main-color;
+        font-size: 2em;
+        font-weight: bold;
+        text-decoration: none;
+      }
     }
+  }
 
-    #name {
-      display: block;
-      color: $main-color;
-      font-size: 2em;
-      font-weight: bold;
-      text-decoration: none;
+  font-size: 14px;
+
+  h1 {
+    font-size: 1.7em;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  h3 {
+    font-size: 1.3em;
+  }
+
+  .table {
+    &.table-striped {
+      td {
+        vertical-align: middle;
+      }
     }
   }
 }

@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="job_web")
  * @ORM\Entity(repositoryClass="Autobus\Bundle\BusBundle\Repository\WebJobRepository")
+ * @UniqueEntity("path")
  */
 class WebJob extends Job
 {
@@ -28,6 +29,15 @@ class WebJob extends Job
      * @ORM\Column(name="secure", type="boolean")
      */
     protected $secure;
+
+    /**
+     * @var string
+     *
+     * @Assert\Valid()
+     *
+     * @ORM\Column(name="path", type="string", unique=true, length=255)
+     */
+    protected $path;
 
     public function __construct()
     {
@@ -74,5 +84,25 @@ class WebJob extends Job
     public function isSecure()
     {
         return $this->secure;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return WebJob
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
     }
 }

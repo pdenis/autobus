@@ -24,3 +24,11 @@ Type: Type
 Choose: Choisir
 Create: Créer
 Schedule: Fréquence
+Job creation: Création d'un job
+Job edit: Edition d'un job
+Create a new job: Créer un job
+Jobs list: Liste des jobs
+Execution history: Historique d'exécution
+Job detail: Détail d'un job
+Invalid schedule format (should be cron-compliant): Format de la fréquence invalide (doit être au format cron)
+Runner: Runner

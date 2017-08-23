@@ -16,6 +16,7 @@ class WebJobType extends JobType
         parent::buildForm($builder, $options);
 
         $builder
+          ->add('path')
           ->add('secure')
           ->add('methods', ChoiceType::class, ['multiple' => true, 'choices' => ['GET' => 'GET', 'POST' => 'POST'], 'expanded' => true]);
     }

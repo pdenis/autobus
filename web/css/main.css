@@ -1,15 +1,25 @@
-#header {
-  padding: 20px; }
-  #header #logo-container {
-    text-align: center; }
-    #header #logo-container #logo {
-      width: 100px;
-      border: 0; }
-    #header #logo-container #name {
-      display: block;
-      color: #7F0000;
-      font-size: 2em;
-      font-weight: bold;
-      text-decoration: none; }
+body {
+  font-size: 14px; }
+  body #header {
+    padding: 20px; }
+    body #header #logo-container {
+      text-align: center; }
+      body #header #logo-container #logo {
+        width: 100px;
+        border: 0; }
+      body #header #logo-container #name {
+        display: block;
+        color: #7F0000;
+        font-size: 2em;
+        font-weight: bold;
+        text-decoration: none; }
+  body h1 {
+    font-size: 1.7em; }
+  body h2 {
+    font-size: 1.5em; }
+  body h3 {
+    font-size: 1.3em; }
+  body .table.table-striped td {
+    vertical-align: middle; }
 
 /*# sourceMappingURL=main.css.map */

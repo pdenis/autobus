@@ -12,13 +12,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="job")
  * @ORM\Entity(repositoryClass="Autobus\Bundle\BusBundle\Repository\JobRepository")
- * @UniqueEntity("path")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"job_web" = "WebJob", "job_queue" = "QueueJob", "job_cron" = "CronJob"})
  * @ORM\HasLifecycleCallbacks()
- *
- *
  */
 abstract class Job
 {
@@ -44,15 +41,6 @@ abstract class Job
      * @ORM\Column(name="service", type="string", length=255)
      */
     protected $runner;
-
-    /**
-     * @var string
-     *
-     * @Assert\Valid()
-     *
-     * @ORM\Column(name="path", type="string", unique=true, length=255)
-     */
-    protected $path;
 
     /**
      * @var string
@@ -167,26 +155,6 @@ abstract class Job
     public function getRunner()
     {
         return $this->runner;
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return Job
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
     }
 
     /**

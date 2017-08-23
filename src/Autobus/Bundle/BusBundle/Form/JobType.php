@@ -24,7 +24,6 @@ class JobType extends AbstractType
         $builder
           ->add('name')
           ->add('runner', ChoiceType::class, ['choices' => $runnerClasses])
-          ->add('path')
           ->add('trace')
           ->add('config');
     }

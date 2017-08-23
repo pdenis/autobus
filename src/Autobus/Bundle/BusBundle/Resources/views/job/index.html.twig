@@ -19,9 +19,13 @@
         {% for job in jobs %}
             <tr>
                 <td><a href="{{ path('job_show', { 'id': job.id }) }}">{{ job.name }}</a></td>
-                <td><a href="{{ path('job_execution', { 'path': job.path }) }}">{{ path('job_execution', { 'path': job.path }) }}</a></td>
                 <td>
-                    <a href="{{ path('job_edit', { 'id': job.id }) }}" class="btn btn-sm btn-warning">{{ 'Edit'|trans }}</a>
+                    {% if attribute(job, 'getPath') is defined %}
+                        <a href="{{ path('job_execution', { 'path': job.path }) }}">{{ path('job_execution', { 'path': job.path }) }}</a>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('job_edit', { 'id': job.id }) }}" class="btn btn-xs btn-warning">{{ 'Edit'|trans }}</a>
                 </td>
             </tr>
         {% endfor %}

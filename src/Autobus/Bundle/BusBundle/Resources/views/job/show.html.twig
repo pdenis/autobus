@@ -1,7 +1,7 @@
 {% extends 'AutobusBusBundle::base.html.twig' %}
 
 {% block content %}
-    <h1>job</h1>
+    <h1>{{ 'Job detail'|trans }} : {{ job.name }}</h1>
 
     <h2>{{ 'Execution history'|trans }}</h2>
 
@@ -9,7 +9,7 @@
         <thead>
         <tr>
             <th>{{ 'Date'|trans }}</th>
-            <th>{{ 'caller'|trans }}</th>
+            <th>{{ 'Caller'|trans }}</th>
             <th>{{ 'Duration'|trans }}</th>
             <th>{{ 'State'|trans }}</th>
             <th>{{ 'Actions'|trans }}</th>
