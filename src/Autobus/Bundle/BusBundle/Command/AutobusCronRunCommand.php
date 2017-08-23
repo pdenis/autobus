@@ -2,13 +2,12 @@
 
 namespace Autobus\Bundle\BusBundle\Command;
 
+use Autobus\Bundle\BusBundle\Context;
 use Autobus\Bundle\BusBundle\Entity\Execution;
 use Autobus\Bundle\BusBundle\Runner\RunnerInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class AutobusCronRunCommand extends ContainerAwareCommand
 {
@@ -34,7 +33,8 @@ class AutobusCronRunCommand extends ContainerAwareCommand
             /** @var RunnerInterface $runner */
             $runner = $container->get($runnerServiceId);
 
-            $runner->handle(new Request(), new Response(), $job, $execution);
+            $context = new Context();
+            $runner->handle($context, $job, $execution);
 
             $job->reschedule();
 

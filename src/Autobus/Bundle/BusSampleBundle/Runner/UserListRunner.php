@@ -2,6 +2,7 @@
 
 namespace Autobus\Bundle\BusSampleBundle\Runner;
 
+use Autobus\Bundle\BusBundle\Context;
 use Autobus\Bundle\BusBundle\Entity\Execution;
 use Autobus\Bundle\BusBundle\Entity\Job;
 use Autobus\Bundle\BusBundle\Runner\AbstractRunner;
@@ -43,16 +44,15 @@ class UserListRunner extends AbstractRunner implements ExportRunnerInterface
     }
 
     /**
-     * @param Request   $request
-     * @param Response  $response
-     * @param Job       $job
-     * @param Execution $execution
+     * @param Context     $context
+     * @param Job         $job
+     * @param Execution   $execution
      *
      * @return mixed
      */
-    protected function process(Request $request, Response $response, Job $job, Execution $execution)
+    protected function process(Context $context, Job $job, Execution $execution)
     {
-        $this->request = $request;
+        $this->request = $context->getRequest();
         $this->users = array(
             array(
                 'id' => 1,
