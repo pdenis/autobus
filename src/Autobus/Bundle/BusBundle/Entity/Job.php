@@ -111,6 +111,11 @@ abstract class Job
         }
     }
 
+    public function populateExecution(Execution $execution)
+    {
+        $execution->setDate(new \DateTime());
+    }
+
     /**
      * Get id
      *

@@ -2,6 +2,8 @@
 
 namespace Autobus\Bundle\BusBundle\Repository;
 
+use Autobus\Bundle\BusBundle\Entity\CronJob;
+
 /**
  * CronJobRepository
  *
@@ -10,4 +12,23 @@ namespace Autobus\Bundle\BusBundle\Repository;
  */
 class CronJobRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Get due jobs
+     *
+     * @param \DateTime $date
+     *
+     * @return CronJob[]
+     */
+    public function findDueJobs($date = null)
+    {
+        if (is_null($date)) {
+            $date = new \DateTime();
+        }
+
+        $query = $this->createQueryBuilder('j')
+          ->where('j.nextRunDate <= :date OR j.nextRunDate IS NULL')
+          ->setParameter('date', $date->format('Y-m-d H:i:s'));
+
+        return $query->getQuery()->getResult();
+    }
 }

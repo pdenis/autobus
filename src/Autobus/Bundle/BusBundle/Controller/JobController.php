@@ -125,9 +125,9 @@ class JobController extends Controller
      */
     public function executeAction(Request $request, Job $job)
     {
-        $runnerClass = $job->getRunner();
+        $runnerServiceId = $job->getRunner();
         /** @var RunnerInterface $runner */
-        $runner = $this->get($runnerClass);
+        $runner = $this->get($runnerServiceId);
 
         $response = new Response();
         $execution = new Execution();
