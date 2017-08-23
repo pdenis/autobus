@@ -49,17 +49,7 @@ class StartExecutionSubscriber implements EventSubscriberInterface
         $request   = $event->getRequest();
         $job       = $event->getJob();
 
-        if ($job instanceof WebJob) {
-            $caller = $event->getRequest()->getClientIp();
-        } elseif ($job instanceof CronJob || $job instanceof QueueJob) {
-            $caller = gethostname();
-        } else {
-            $caller = 'none';
-        }
-
         $execution
-            ->setDate(new \DateTime())
-            ->setCaller($caller)
             ->setJob($job)
             ->start();
 
