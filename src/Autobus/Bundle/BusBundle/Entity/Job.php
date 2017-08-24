@@ -81,6 +81,12 @@ abstract class Job
      */
     protected $executions;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Autobus\Bundle\BusBundle\Entity\JobGroup", inversedBy="jobs")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id")
+     */
+    private $group;
+
     public function __construct()
     {
         $this->executions = new ArrayCollection();
@@ -287,5 +293,24 @@ abstract class Job
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @param mixed $group
+     * @return Job
+     */
+    public function setGroup($group)
+    {
+        $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroup()
+    {
+        return $this->group;
     }
 }
