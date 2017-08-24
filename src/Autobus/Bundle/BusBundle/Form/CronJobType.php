@@ -2,6 +2,7 @@
 
 namespace Autobus\Bundle\BusBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,7 +16,7 @@ class CronJobType extends JobType
         parent::buildForm($builder, $options);
 
         $builder
-          ->add('schedule');
+          ->add('schedule', TextType::class);
     }
 
     /**

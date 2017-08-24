@@ -2,9 +2,8 @@
 
 namespace Autobus\Bundle\BusBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Autobus\Bundle\BusBundle\Context;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -44,6 +43,13 @@ class WebJob extends Job
         parent::__construct();
 
         $this->methods = [];
+    }
+
+    public function populateExecution(Execution $execution, Context $context)
+    {
+        parent::populateExecution($execution, $context);
+
+        $execution->setCaller($context->getRequest()->getClientIp());
     }
 
     /**

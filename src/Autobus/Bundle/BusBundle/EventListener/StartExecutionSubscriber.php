@@ -2,6 +2,9 @@
 
 namespace Autobus\Bundle\BusBundle\EventListener;
 
+use Autobus\Bundle\BusBundle\Entity\CronJob;
+use Autobus\Bundle\BusBundle\Entity\QueueJob;
+use Autobus\Bundle\BusBundle\Entity\WebJob;
 use Autobus\Bundle\BusBundle\Event\RunnerEvents;
 use Autobus\Bundle\BusBundle\Event\RunnerHandleEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -47,14 +50,14 @@ class StartExecutionSubscriber implements EventSubscriberInterface
         $job       = $event->getJob();
 
         $execution
-            ->setDate(new \DateTime())
-            ->setCaller($event->getRequest()->getClientIp())
             ->setJob($job)
             ->start();
 
-        $allowedMethods = $job->getMethods(); // ?
-        if (!empty($allowedMethods) && !in_array($request->getMethod(), $allowedMethods)) {
-            throw new BadRequestHttpException(sprintf('Method [%s] not allowed (allowed methods: %s]', $request->getMethod(), implode(', ', $allowedMethods)));
+        if ($job instanceof WebJob) {
+            $allowedMethods = $job->getMethods(); // ?
+            if (!empty($allowedMethods) && !in_array($request->getMethod(), $allowedMethods)) {
+                throw new BadRequestHttpException(sprintf('Method [%s] not allowed (allowed methods: %s]', $request->getMethod(), implode(', ', $allowedMethods)));
+            }
         }
     }
 }

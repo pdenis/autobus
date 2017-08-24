@@ -2,6 +2,7 @@
 
 namespace Autobus\Bundle\BusBundle\Controller;
 
+use Autobus\Bundle\BusBundle\Context;
 use Autobus\Bundle\BusBundle\Entity\Execution;
 use Autobus\Bundle\BusBundle\Entity\Job;
 use Autobus\Bundle\BusBundle\Runner\RunnerInterface;
@@ -126,20 +127,22 @@ class JobController extends Controller
      */
     public function executeAction(Request $request, Job $job)
     {
-        $runnerClass = $job->getRunner();
+        $runnerServiceId = $job->getRunner();
         /** @var RunnerInterface $runner */
-        $runner = $this->get($runnerClass);
+        $runner = $this->get($runnerServiceId);
 
         $response = new Response();
         $execution = new Execution();
+        $context = new Context();
+        $context->setRequest($request)->setResponse($response);
 
-        $runner->handle($request, $response, $job, $execution);
+        $runner->handle($context, $job, $execution);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($execution);
         $em->flush();
 
-        return $response;
+        return $context->getResponse();
     }
 
     /**
