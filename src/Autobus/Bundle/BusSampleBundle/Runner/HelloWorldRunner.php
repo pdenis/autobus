@@ -11,6 +11,6 @@ class HelloWorldRunner extends AbstractRunner
 {
     protected function process(Context $context, Job $job, Execution $execution)
     {
-        return $context->getResponse()->setContent('Hello world!');
+        return $context->setMessage('Hello world!');
     }
 }

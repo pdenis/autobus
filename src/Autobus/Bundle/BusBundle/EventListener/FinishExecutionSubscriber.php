@@ -2,6 +2,7 @@
 
 namespace Autobus\Bundle\BusBundle\EventListener;
 
+use Autobus\Bundle\BusBundle\Entity\WebJob;
 use Autobus\Bundle\BusBundle\Event\RunnerEvents;
 use Autobus\Bundle\BusBundle\Event\RunnerHandleEvent;
 use Psr\Log\LoggerInterface;
@@ -54,36 +55,41 @@ class FinishExecutionSubscriber implements EventSubscriberInterface
     {
         $execution = $event->getExecution();
         $response  = $event->getResponse();
-        $job       = $event->getJOb();
+        $job       = $event->getJob();
         $request   = $event->getRequest();
+        $context   = $event->getContext();
 
         $execution->finish();
 
-        if ($response->getStatusCode() >= 400) {
-            $execution->setState($execution::STATE_ERROR);
-        }
+        if ($job instanceof WebJob) {
+            if ($response->getStatusCode() >= 400) {
+                $execution->setState($execution::STATE_ERROR);
+            }
 
-        if ($job->getTrace()) {
-            $logs = $this->logger->getLogs();
-            $logs = array_map(function($log) {
-                return sprintf('%s [%s] %s', $log['timestamp'], $log['priorityName'], $log['message']);
-            }, $logs);
-            $execution->setLogs(implode("\n", $logs));
+            $response->setContent($context->getMessage());
 
-            $requestString = $request->headers->__toString();
-            $requestString .= "\n\n".$request->getContent();
-            $execution->setRequest($requestString);
+            if ($job->getTrace()) {
+                $logs = $this->logger->getLogs();
+                $logs = array_map(function($log) {
+                    return sprintf('%s [%s] %s', $log['timestamp'], $log['priorityName'], $log['message']);
+                }, $logs);
+                $execution->setLogs(implode("\n", $logs));
 
-            $responseString = sprintf("HTTP %d\n\n", $response->getStatusCode());
-            $responseString .= $response->headers->__toString();
-            $responseString .= "\n\n".$response->getContent();
-            $execution->setResponse($responseString);
-        }
+                $requestString = $request->headers->__toString();
+                $requestString .= "\n\n".$request->getContent();
+                $execution->setRequest($requestString);
 
-        if ($request->getContentType() == 'xml') {
-            $response->setContent('<result><![CDATA['.$response->getContent().']]></result>');
-        } elseif ($request->getContentType() == 'json') {
-            $response->setContent(sprintf('{"result":"%s"}', addslashes($response->getContent())));
+                $responseString = sprintf("HTTP %d\n\n", $response->getStatusCode());
+                $responseString .= $response->headers->__toString();
+                $responseString .= "\n\n".$response->getContent();
+                $execution->setResponse($responseString);
+            }
+
+            if ($request->getContentType() == 'xml') {
+                $response->setContent('<result><![CDATA['.$response->getContent().']]></result>');
+            } elseif ($request->getContentType() == 'json') {
+                $response->setContent(sprintf('{"result":"%s"}', addslashes($response->getContent())));
+            }
         }
     }
 }

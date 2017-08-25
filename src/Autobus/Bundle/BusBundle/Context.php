@@ -23,7 +23,7 @@ class Context
     protected $message;
 
     /**
-     * @param string $message
+     * @param mixed $message
      * @return Context
      */
     public function setMessage($message)
@@ -34,7 +34,7 @@ class Context
     }
 
     /**
-     * @return string
+     * @return mixed
      */
     public function getMessage()
     {

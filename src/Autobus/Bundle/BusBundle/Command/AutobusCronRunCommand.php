@@ -36,6 +36,8 @@ class AutobusCronRunCommand extends ContainerAwareCommand
             $context = new Context();
             $runner->handle($context, $job, $execution);
 
+            $output->writeln($context->getMessage());
+
             $job->reschedule();
 
             $manager->persist($execution);
