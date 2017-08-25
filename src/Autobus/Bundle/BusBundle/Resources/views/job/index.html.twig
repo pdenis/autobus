@@ -31,7 +31,7 @@
                 <td>{{ job.type|capitalize }}</td>
                 <td>{% include("AutobusBusBundle::job/partials/_list_details_" ~ job.type ~ ".html.twig")  %}</td>
                 <td>{% include("AutobusBusBundle::job/partials/_state.html.twig")  %}</td>
-                <td>{% if lastExecution %}{{ lastExecution.date|date('d/m/Y H:i') }}{% endif %}</td>
+                <td>{% if lastExecution %}<a href="{{ path('execution_show', {id: lastExecution.id}) }}">{{ lastExecution.date|date('d/m/Y H:i') }}</a>{% endif %}</td>
                 <td>
                     <a href="{{ path('job_edit', { 'id': job.id }) }}" class="btn btn-xs btn-warning">{{ 'Edit'|trans }}</a>
                 </td>
