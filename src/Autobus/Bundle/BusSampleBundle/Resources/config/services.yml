@@ -3,10 +3,12 @@ services:
         class: Autobus\Bundle\BusSampleBundle\Runner\HelloWorldRunner
         arguments:
           - '@event_dispatcher'
-        tags: ['bus.runner']
+        tags:
+          - { name: 'bus.runner', label: 'Hello world'}
 
     bus_sample.runner.users:
         class: Autobus\Bundle\BusSampleBundle\Runner\UserListRunner
         arguments:
           - '@event_dispatcher'
-        tags: ['bus.runner']
+        tags:
+          - { name: 'bus.runner', label: 'User list'}

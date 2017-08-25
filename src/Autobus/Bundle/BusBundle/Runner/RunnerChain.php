@@ -12,9 +12,12 @@ final class RunnerChain
      */
     private $runners = array();
 
-    public function addRunner(RunnerInterface $runner, $id)
+    public function addRunner(RunnerInterface $runner, $id, $label)
     {
-        $this->runners[$id] = $runner;
+        $this->runners[$id] = [
+          'label' => $label,
+          'runner' => $runner,
+        ];
     }
 
     /**

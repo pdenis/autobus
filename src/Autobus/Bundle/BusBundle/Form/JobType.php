@@ -20,12 +20,12 @@ class JobType extends AbstractType
 
         $runnerClasses = [];
         foreach ($runnerChain->getRunners() as $sid => $runner) {
-            $runnerClasses[$sid] = $sid;
+            $runnerClasses[$sid] = $runner['label'];
         }
 
         $builder
           ->add('name')
-          ->add('runner', ChoiceType::class, ['choices' => $runnerClasses])
+          ->add('runner', ChoiceType::class, ['choices' => array_flip($runnerClasses)])
           ->add('group', EntityType::class, ['placeholder' => 'Choose ...', 'required' => false, 'class' => JobGroup::class])
           ->add('trace')
           ->add('config');
