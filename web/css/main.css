@@ -34,5 +34,15 @@ body {
     vertical-align: middle; }
   body .form-horizontal .checkbox label {
     line-height: 1.5; }
+  body .inline-code {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    background: #f9f9f9;
+    color: #bbbbbb;
+    border: 1px solid #bbbbbb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 5px;
+    display: inline-block; }
 
 /*# sourceMappingURL=main.css.map */

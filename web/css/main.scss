@@ -1,4 +1,3 @@
-
 $main-color: #7F0000;
 $nav-background-color: $main-color;
 $nav-link-color: #ffffff;
@@ -21,8 +20,8 @@ body {
     }
 
     .navbar-nav {
-      &>.active {
-        &>a {
+      & > .active {
+        & > a {
           color: $nav-link-hover-color;
           &:hover, &:focus {
             color: $nav-link-color;
@@ -35,8 +34,8 @@ body {
           color: $nav-link-hover-color;
         }
       }
-      &>.dropdown {
-        &>a {
+      & > .dropdown {
+        & > a {
           .caret {
             border-top-color: $nav-link-color;
             border-bottom-color: $nav-link-color;
@@ -81,5 +80,17 @@ body {
         line-height: 1.5;
       }
     }
+  }
+
+  .inline-code {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    background: #f9f9f9;
+    color: #bbbbbb;
+    border: 1px solid #bbbbbb;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    padding: 1px 5px;
+    display: inline-block;
   }
 }

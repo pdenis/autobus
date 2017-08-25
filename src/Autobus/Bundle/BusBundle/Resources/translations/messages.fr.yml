@@ -14,6 +14,7 @@ State: État
 Duration: Durée
 View: Voir
 Detail: Détail
+Details: Détails
 Service call: Appel à un service
 Request: Requête
 Response: Réponse
@@ -38,3 +39,4 @@ Jobs: Jobs
 Executions: Exécutions
 Methods: Méthodes
 Delete: Supprimer
+Queue: Queue

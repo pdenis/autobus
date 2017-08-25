@@ -11,7 +11,7 @@
         <thead>
             <tr>
                 <th>{{ 'Name'|trans }}</th>
-                <th>{{ 'Path'|trans }}</th>
+                <th>{{ 'Details'|trans }}</th>
                 <th>{{ 'Actions'|trans }}</th>
             </tr>
         </thead>
@@ -20,10 +20,7 @@
             <tr>
                 <td><a href="{{ path('job_show', { 'id': job.id }) }}">{{ job.name }}</a></td>
                 <td>
-                    {% if attribute(job, 'getPath') is defined %}
-                        {% dump(job) %}
-                        <a href="{{ path('job_execution', { 'path': job.path }) }}">{{ path('job_execution', { 'path': job.path }) }}</a>
-                    {% endif %}
+                    {% include("AutobusBusBundle::job/partials/_list_details_" ~ job.type ~ ".html.twig")  %}
                 </td>
                 <td>
                     <a href="{{ path('job_edit', { 'id': job.id }) }}" class="btn btn-xs btn-warning">{{ 'Edit'|trans }}</a>

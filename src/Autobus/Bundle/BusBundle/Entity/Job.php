@@ -313,4 +313,16 @@ abstract class Job
     {
         return $this->group;
     }
+
+    /**
+     * Get job type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        $klass = get_class($this);
+        $typePos = strrpos($klass, '\\');
+        return strtolower(substr($klass, $typePos + 1, -3)); // -3 is to remove 'Job' at the end
+    }
 }
