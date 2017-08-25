@@ -49,6 +49,8 @@ class StartExecutionSubscriber implements EventSubscriberInterface
         $request   = $event->getRequest();
         $job       = $event->getJob();
 
+        $job->populateExecution($execution, $event->getContext());
+
         $execution
             ->setJob($job)
             ->start();

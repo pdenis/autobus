@@ -44,5 +44,9 @@ body {
     border-radius: 3px;
     padding: 1px 5px;
     display: inline-block; }
+  body .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none; }
 
 /*# sourceMappingURL=main.css.map */

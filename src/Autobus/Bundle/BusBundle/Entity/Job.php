@@ -4,6 +4,7 @@ namespace Autobus\Bundle\BusBundle\Entity;
 
 use Autobus\Bundle\BusBundle\Context;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -80,6 +81,11 @@ abstract class Job
      * @ORM\OneToMany(targetEntity="Autobus\Bundle\BusBundle\Entity\Execution", mappedBy="job")
      */
     protected $executions;
+
+    /**
+     * @var Execution
+     */
+    protected $lastExecution;
 
     /**
      * @ORM\ManyToOne(targetEntity="Autobus\Bundle\BusBundle\Entity\JobGroup", inversedBy="jobs")
@@ -324,5 +330,32 @@ abstract class Job
         $klass = get_class($this);
         $typePos = strrpos($klass, '\\');
         return strtolower(substr($klass, $typePos + 1, -3)); // -3 is to remove 'Job' at the end
+    }
+
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return 'success';
+    }
+
+    /**
+     * Get last execution
+     *
+     * @return Execution
+     */
+    public function getLastExecution()
+    {
+        if ($this->lastExecution === null) {
+            $criteria = Criteria::create()
+              ->orderBy(['date' => Criteria::DESC])
+              ->setMaxResults(1);
+
+            $lastExecution = $this->getExecutions()->matching($criteria)->first();
+            $this->lastExecution = $lastExecution ? $lastExecution : null;
+        }
+
+        return $this->lastExecution;
     }
 }

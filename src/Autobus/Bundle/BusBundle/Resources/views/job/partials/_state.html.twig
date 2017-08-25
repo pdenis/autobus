@@ -1,0 +1,12 @@
+{% if lastExecution %}
+    {% set state = lastExecution.state %}
+    {% if state == 'success' %}
+        <span class="label label-success">{{ state|trans }}</span>
+    {% elseif state == 'error' %}
+        <span class="label label-danger">{{ state|trans }}</span>
+    {% else %}
+        <span class="label label-warning">{{ state|trans }}</span>
+    {% endif %}
+{% else %}
+    <span class="label label-default">N/A</span>
+{% endif %}

@@ -93,4 +93,10 @@ body {
     padding: 1px 5px;
     display: inline-block;
   }
+
+  .vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+  }
 }

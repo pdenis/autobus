@@ -5,6 +5,7 @@ namespace Autobus\Bundle\BusBundle\Controller;
 use Autobus\Bundle\BusBundle\Context;
 use Autobus\Bundle\BusBundle\Entity\Execution;
 use Autobus\Bundle\BusBundle\Entity\Job;
+use Autobus\Bundle\BusBundle\Entity\WebJob;
 use Autobus\Bundle\BusBundle\Runner\RunnerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -121,11 +122,11 @@ class JobController extends Controller
 
     /**
      * @param Request $request
-     * @param Job     $job
+     * @param WebJob     $job
      *
      * @return Response
      */
-    public function executeAction(Request $request, Job $job)
+    public function executeAction(Request $request, WebJob $job)
     {
         $runnerServiceId = $job->getRunner();
         /** @var RunnerInterface $runner */
