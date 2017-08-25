@@ -1,25 +1,38 @@
 body {
+  padding-top: 70px;
+  padding-bottom: 30px;
   font-size: 14px; }
-  body #header {
-    padding: 20px; }
-    body #header #logo-container {
-      text-align: center; }
-      body #header #logo-container #logo {
-        width: 100px;
-        border: 0; }
-      body #header #logo-container #name {
-        display: block;
-        color: #7F0000;
-        font-size: 2em;
-        font-weight: bold;
-        text-decoration: none; }
+  body .navbar-default {
+    background: #7F0000;
+    color: #ffffff; }
+    body .navbar-default .navbar-brand {
+      color: #ffffff; }
+      body .navbar-default .navbar-brand:hover, body .navbar-default .navbar-brand:focus {
+        color: #cccccc; }
+    body .navbar-default .navbar-nav > .active > a {
+      color: #cccccc; }
+      body .navbar-default .navbar-nav > .active > a:hover, body .navbar-default .navbar-nav > .active > a:focus {
+        color: #ffffff; }
+    body .navbar-default .navbar-nav a {
+      color: #ffffff; }
+      body .navbar-default .navbar-nav a:hover, body .navbar-default .navbar-nav a:focus {
+        color: #cccccc; }
+    body .navbar-default .navbar-nav > .dropdown > a .caret {
+      border-top-color: #ffffff;
+      border-bottom-color: #ffffff; }
+    body .navbar-default .navbar-nav > .dropdown > a:hover .caret, body .navbar-default .navbar-nav > .dropdown > a:focus .caret {
+      border-top-color: #cccccc;
+      border-bottom-color: #cccccc; }
   body h1 {
-    font-size: 1.7em; }
+    font-size: 1.7em;
+    margin-top: 15px; }
   body h2 {
     font-size: 1.5em; }
   body h3 {
     font-size: 1.3em; }
   body .table.table-striped td {
     vertical-align: middle; }
+  body .form-horizontal .checkbox label {
+    line-height: 1.5; }
 
 /*# sourceMappingURL=main.css.map */

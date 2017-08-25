@@ -21,6 +21,7 @@
                 <td><a href="{{ path('job_show', { 'id': job.id }) }}">{{ job.name }}</a></td>
                 <td>
                     {% if attribute(job, 'getPath') is defined %}
+                        {% dump(job) %}
                         <a href="{{ path('job_execution', { 'path': job.path }) }}">{{ path('job_execution', { 'path': job.path }) }}</a>
                     {% endif %}
                 </td>
