@@ -2,6 +2,8 @@
 
 namespace Autobus\Bundle\BusBundle\Repository;
 
+use Autobus\Bundle\BusBundle\Entity\WebJob;
+
 /**
  * WebJobRepository
  *
@@ -10,4 +12,18 @@ namespace Autobus\Bundle\BusBundle\Repository;
  */
 class WebJobRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $prefix
+     *
+     * @return WebJob[]
+     */
+    public function findAllMatchingPrefix($prefix)
+    {
+        $qb = $this->createQueryBuilder('w');
+        $qb->where('w.path LIKE :prefix')
+            ->setParameter('prefix', '%'.$prefix.'%');
+
+        return $qb->getQuery()->execute();
+
+    }
 }

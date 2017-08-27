@@ -10,6 +10,7 @@ use Autobus\Bundle\BusBundle\Runner\RunnerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Job controller.
@@ -124,6 +125,7 @@ class JobController extends Controller
      * @param Request $request
      * @param WebJob     $job
      *
+     * @ParamConverter(converter="bus_job_converter", class="Autobus\Bundle\BusBundle\Entity\WebJob")
      * @return Response
      */
     public function executeAction(Request $request, WebJob $job)
