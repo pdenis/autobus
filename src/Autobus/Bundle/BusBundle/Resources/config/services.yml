@@ -27,7 +27,24 @@ services:
     tags: ['kernel.event_subscriber']
 
   bus.event_listener.secure_web_job:
-      class: Autobus\Bundle\BusBundle\EventListener\SecureWebJobSubscriber
-      arguments:
-        - '@Autobus\Bundle\BusBundle\Security\SecurityChain'
-      tags: ['kernel.event_subscriber']
+    class: Autobus\Bundle\BusBundle\EventListener\SecureWebJobSubscriber
+    arguments:
+      - '@Autobus\Bundle\BusBundle\Security\SecurityChain'
+    tags: ['kernel.event_subscriber']
+
+  bus.converter.job:
+    class:  Autobus\Bundle\BusBundle\Converter\JobParamConverter
+    arguments:
+      - '@bus.routing.matcher.job_url'
+      - '@doctrine.orm.entity_manager'
+    tags:
+      - { name: request.param_converter, converter: bus_job_converter}
+
+  bus.routing.route_collection:
+    class: Symfony\Component\Routing\RouteCollection
+
+  bus.routing.matcher.job_url:
+    class: Autobus\Bundle\BusBundle\Routing\Matcher\JobUrlMatcher
+    arguments:
+      - '@bus.routing.route_collection'
+      - '@router.request_context'
