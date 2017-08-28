@@ -204,6 +204,10 @@ abstract class Job
             $this->configArray = json_decode($this->config, true);
         }
 
+        if (null === $this->configArray) {
+            $this->configArray = array();
+        }
+
         return $this->configArray;
     }
 

@@ -1,0 +1,3 @@
+autobus_bus_configuration_job:
+    path:     /configure/{id}
+    defaults: { _controller: AutobusBusConfigurationBundle:Configuration:edit }

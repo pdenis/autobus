@@ -1,0 +1,11 @@
+services:
+    bus_configuration.builder.configuration:
+        class: Autobus\Bundle\BusConfigurationBundle\Builder\ConfigurationBuilder
+
+    bus_configuration.processor.configuration:
+        class: Autobus\Bundle\BusConfigurationBundle\Processor\ConfigurationProcessor
+        arguments:
+            - '@bus_configuration.processor'
+
+    bus_configuration.processor:
+        class: Symfony\Component\Config\Definition\Processor

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Autobus\Bundle\BusBundle\AutobusBusBundle(),
             new Autobus\Bundle\BusExportBundle\AutobusBusExportBundle(),
             new Autobus\Bundle\BusSampleBundle\AutobusBusSampleBundle(),
+            new Autobus\Bundle\BusConfigurationBundle\AutobusBusConfigurationBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

@@ -1,3 +1,7 @@
+autobus_bus_configuration:
+    resource: "@AutobusBusConfigurationBundle/Resources/config/routing.yml"
+    prefix:   /job
+
 bus:
     resource: "@AutobusBusBundle/Resources/config/routing.yml"
     prefix:   /
