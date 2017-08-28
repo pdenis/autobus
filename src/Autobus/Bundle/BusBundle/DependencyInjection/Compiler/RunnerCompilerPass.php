@@ -23,7 +23,9 @@ class RunnerCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds('bus.runner');
 
         foreach ($taggedServices as $id => $tags) {
-            $definition->addMethodCall('addRunner', array(new Reference($id), $id));
+            foreach ($tags as $attributes) {
+                $definition->addMethodCall('addRunner', array(new Reference($id), $id, $attributes['label']));
+            }
         }
     }
 }
